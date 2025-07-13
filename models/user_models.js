@@ -56,7 +56,26 @@ state:{
     this.id = uuid.v1();
     this.updatedOn= Datenow();
     this.createdOn = Date.now();
+
+    // hash the passsword 
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(this.password, salt);
+    this.password = hash;
+    next();
+    next('an error occured');
  });
 
 
+userSchema.pre(['update', 'findOneAndUpdate', 'updateOne'], function(next) {
+    const update = this.getUpdate();
+    delete update.id;
+    delete update._id;
+
+    this.updateOn = new Date();
+    next();
+
+});
+
+const UserModel = model('User', userSchema0);
+module.exports = UserModel;
 
