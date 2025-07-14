@@ -13,9 +13,9 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(cors());
 
-mongoose.connect('mongodb+srv://madhavtharu000:madhav@cluster0.yl4d806.mongodb.net/SajiloStore?retryWrites=true&w=majority&appName=Cluster0'),
-
-
+mongoose.connect("mongodb+srv://madhavtharu000:madhav@cluster0.yl4d806.mongodb.net/sajilostore?retryWrites=true&w=majority&appName=Cluster0");
+const UserRoutes = require('./routes/user_routes');
+app.use("/nodu", UserRoutes);
 
 
 app.listen(3000, () => {

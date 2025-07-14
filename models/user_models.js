@@ -1,8 +1,8 @@
-const {Schema , model} = require ('mongoose');
+const  {Schema , model} = require ('mongoose');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
  
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     id:{
         type: String, 
         unique: true,
@@ -62,20 +62,21 @@ state:{
     const hash = bcrypt.hashSync(this.password, salt);
     this.password = hash;
     next();
-    next('an error occured');
+    
  });
 
 
 userSchema.pre(['update', 'findOneAndUpdate', 'updateOne'], function(next) {
     const update = this.getUpdate();
-    delete update.id;
     delete update._id;
+    delete update.id;
+    
 
     this.updateOn = new Date();
     next();
 
 });
 
-const UserModel = model('User', userSchema0);
+const UserModel = model('User', userSchema);
 module.exports = UserModel;
 
