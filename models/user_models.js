@@ -3,59 +3,58 @@ const uuid = require('uuid');
 const bcrypt = require('bcrypt');
  
 const userSchema = new Schema({
-    id:{
+       id:{
         type: String, 
-        unique: true,
+        unique: true
     },
+  
     fullName:{
         type: String,
-        unique:true,
-        required: true,
+        default:""
     },
     email:{
         type:String,
         unique:true,
-        required: true,
+        required: true
     }, 
     password:{
         type:String,
-        required: true,
+        required: true
     },
     phoneNumber:{
         type:String,
-        unique:true,
-        required: true,
+        default:""
     },
     address:{
         type:String,
-        default:'',
+        default:""
     },
     city:{
         type:String,
-        default:'',
+        default:""
     },
 state:{
     type:String,
-    default:'',
+    default:""
 },
  profileProgress:{
     type:Number,
-    default:0,// this field is account created 
+    default:0// this field is account created 
  },
+
+
  updatedOn:{
-    type:Date,
-    default: Date.now,
+    type:Date
  },
  createdOn:{
-    type:Date,
-    default: Date.now,
+    type:Date
  },
  });
 
  userSchema.pre('save', function(next){
     this.id = uuid.v1();
-    this.updatedOn= Datenow();
-    this.createdOn = Date.now();
+    this.updatedOn= new Date();
+    this.createdOn =  new Date();
 
     // hash the passsword 
     const salt = bcrypt.genSaltSync(10);
