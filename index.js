@@ -27,6 +27,11 @@ const ProductRoutes = require('./routes/product_routes');
 app.use("/api/product", ProductRoutes);
 
 
+const CartRoutes = require('./routes/cart_routes');
+app.use("/api/cart", CartRoutes);
+
+const OrderRoutes = require('./routes/order_routes');
+app.use("/api/order", OrderRoutes);
 
 
 app.listen(3000, () => {
